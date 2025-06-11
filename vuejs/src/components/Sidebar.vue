@@ -3,8 +3,8 @@
         <div class="row">
             <div class="dropdown mt-6 col-8 company-logo">
                 <a href="#" class="d-flex aling-items-center mb=md-0 me-md-auto text-decoration-none">
-                    <i class="fab fa-vuejs me-2" style="font-size: 40px;"></i>
-                    <span class="fs-4">Sidebar</span>
+                    <i class="fa-solid fa-dumbbell me-3" style="font-size: 40px;"></i>
+                    <span class="fs-4">Gympass</span>
                 </a>
             </div>
             <div class="col-3">
@@ -17,16 +17,24 @@
         <ul class="nav nav-pills flex-column mb-auto">
             <li>
                 <route-link to="/" class="nav-link">
-                    <i class="fas fa-techometer-alt me-2"></i>
+                    <i class="fas fa-tachometer-alt me-2"></i>
                     Dashboard
                 </route-link>
             </li>
+            <hr>
             <li>
                 <router-link to="/" class="nav-link">
                     <i class="fas fa-users me-2"></i>
-                    Customers
+                    Lista de Miembros
                 </router-link>
             </li>
+            <li>
+                <router-link to="/" class="nav-link">
+                    <i class="fa-solid fa-address-card me-2"></i>
+                    Registar Miembros
+                </router-link>
+            </li>
+            <hr>
             <li>
                 <router-link to="/" class="nav-link">
                     <i class="fas fa-users me-2"></i>
@@ -39,6 +47,7 @@
                     Permissions
                 </router-link>
             </li>
+            <hr>
             <li class="mb-1">
                 <buttom class="btn btn-toggle aling-items-center rounded collapsed nav-link" data-bs-toggle="collapse" data-bs-
                 target="#home-collapse" aria-expanded="false">
@@ -74,7 +83,7 @@
     data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="avatar bg-primary text-white rounded-circle d-flex aling-items-center justify-content-center me-2"
     style="width: 32px; height: 32px;">
-                <span class="text-uppercase"> J L</span>
+                <span class="text-uppercase">EM</span>
             </div>
             <div class="d-flex flex-column">
                 <strong>Emmanuel Madrid</strong>
