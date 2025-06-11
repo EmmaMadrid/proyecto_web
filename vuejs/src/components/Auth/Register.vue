@@ -23,7 +23,6 @@
                 </p>
             </div>
 
-
             <div class="mb-3">
                 <label for="Email" class="form-label">Correo</label>
                 <input 
@@ -36,7 +35,6 @@
                     error message
                 </p>
             </div>
-
 
             <div class="mb-3">
                 <label for="Password" class="form-label">Contraseña</label>
@@ -52,12 +50,11 @@
                 </p>
             </div>
 
-
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
                 <input 
                 type="password" 
-                            class="form-control" 
+                class="form-control" 
                 id="password_confirmation" 
                 placeholder="Confirma tu contraseña"
                 autocomplete="off"
@@ -66,7 +63,6 @@
                     error message
                 </p>
             </div>
-
 
             <div class="mb-3 form-check">
                 <input 
@@ -82,23 +78,19 @@
                 </p>
             </div>
 
-
             <div class="d-grid gap-2 mb-3">
                 <button class="btn btn-primary" type="submit" >Registrarse</button>
             </div>
 
-
             <div class="text-center mb-3">
                 <span class="or-line">O</span>
             </div>
-
 
             <div class="d-grid gap-2 mb-3">
                 <button class="btn btn-outline-danger" type="button">
                 <i class="fab fa-google me-2"></i> Google
                 </button>
             </div>
-
 
             <div class="text-center">
                 <p class="mb-0">¿Ya tienes una cuenta? <router-link to="/login" class="link-primary">Login</router-link></p>
@@ -111,12 +103,9 @@
   </div>
 </template>
 
-
 <script setup>
 
-
 </script>
-
 
 <style scoped>
     .card {
@@ -132,35 +121,29 @@
         margin-bottom: 20px;
     }
 
-
     .form-label {
         font-weight: bold;
     }
-
 
     .btn-primary {
         background-color: #007bff;
         border-color: #007bff;
     }
 
-
     .btn-primary:hover {
         background-color: #0056b3;
         border-color: #0056b3;
     }
-
 
     .link-secondary {
         color: #6c757d;
         text-decoration: none;
     }
 
-
     .link-secondary:hover {
         color: #495057;
         text-decoration: underline;
     }
-
 
     .or-line {
         display: inline-block;
@@ -168,7 +151,6 @@
         padding: 0 10px;
         font-weight: bold;
     }
-
 
     .or-line::before, .or-line::after {
         content: '';
@@ -179,13 +161,11 @@
         background-color: #ccc;
     }
 
-
     .or-line::before {
         left: -110px; /* Ajusta la posición para centrar correctamente */
     }
 
-
     .or-line::after {
         right: -110px; /* Ajusta la posición para centrar correctamente */
     }
-</style>      
+</style>

@@ -16,14 +16,14 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li>
-                <route-link to="/" class="nav-link">
+                <route-link to="/dashboard" class="nav-link">
                     <i class="fas fa-tachometer-alt me-2"></i>
                     Dashboard
                 </route-link>
             </li>
             <hr>
             <li>
-                <router-link to="/" class="nav-link">
+                <router-link to="/customers" class="nav-link">
                     <i class="fas fa-users me-2"></i>
                     Lista de Miembros
                 </router-link>

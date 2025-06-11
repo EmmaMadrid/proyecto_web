@@ -10,7 +10,7 @@ import ResetPassword from "./components/Auth/ResetPassword.vue";
 import ForgotPassword from "./components/Auth/ForgotPassword.vue";
 import Profile from "./components/Auth/Profile.vue";
 
-import Dashboard from "./components/Dashboard/Dashboard.vue";
+import Dashboard from "./components/Dashboard.vue";
 import Roles from "./components/Roles/IndexRoles.vue";
 import Permissions from "./components/Permissions/IndexPermissions.vue";
 import Users from './components/Users/IndexUsers.vue';

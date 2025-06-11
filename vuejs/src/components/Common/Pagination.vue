@@ -24,9 +24,10 @@
       }
     })
     // El emit nos ayuda a regresar el valor seleccionado al componente papa
-const emit = defineEmits(['paginationChange'])
+    const emit = defineEmits(['paginationChange'])
   
     const paginationChange = (page) => {
       emit('paginationChange', page)
     }
   </script>
+

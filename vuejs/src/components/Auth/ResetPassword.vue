@@ -15,7 +15,6 @@
                                 </p>
                             </div>
 
-
                             <div class="mb-3">
                                 <label for="ConfirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
                                 <input type="password" class="form-control" id="ConfirmPassword"
@@ -25,7 +24,6 @@
                                 </p>
                             </div>
 
-
                             <div class="d-grid gap-2 mb-3">
                                 <button class="btn btn-primary" type="submit">Guardar Contraseña</button>
                             </div>
@@ -34,15 +32,12 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </template>
-
 
 <script setup>
 
-
 </script>
-
 
 <style scoped>
 .card {
@@ -54,31 +49,26 @@
     margin-top: 50px;
 }
 
-
 .card-title {
     margin-bottom: 20px;
 }
 
-
 .form-label {
     font-weight: bold;
 }
-
 
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
 }
 
-
 .btn-primary:hover {
     background-color: #0056b3;
     border-color: #0056b3;
 }
 
-
 .text-danger {
     font-size: 0.875rem;
     /* Tamaño de fuente para los mensajes de error */
 }
-</style>  
+</style>
