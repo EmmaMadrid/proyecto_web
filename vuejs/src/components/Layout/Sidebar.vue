@@ -49,14 +49,13 @@
             </li>
             <hr>
             <li class="mb-1">
-                <buttom class="btn btn-toggle aling-items-center rounded collapsed nav-link" data-bs-toggle="collapse" data-bs-
-                target="#home-collapse" aria-expanded="false">
-                    Users & Roles
-                </buttom>
+            <button class="btn btn-toggle align-items-center rounded collapsed nav-link" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                        Users & Roles
+                    </button>
                 <div class="collapse" id="home-collapse" style="">
                     <ul class= "nav flex-column ms-3 text-extra-small">
                         <li>
-                            <router-link to="/" class="nav-link">
+                            <router-link to="/users" class="nav-link">
                                 <i class="fas fa-user me-2"></i>
                                 Users
                             </router-link>

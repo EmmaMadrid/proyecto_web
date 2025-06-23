@@ -1,63 +1,68 @@
 <template>
     <div>
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid">
-                <button class="navbar-toggler d-md-none" type="button" @click="toggleSidebar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <router-link to="/" class="navbar-brand ms-auto">
-                </router-link>
-                <ul class="navbar-nav ms-auto">
-                    <li class="navbar-item">
-                        <router-link to="/" class="nav-link">Login</router-link>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler d-md-none" type="button" @click="toggleSidebar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <router-link to="/" class="navbar-brand ms-auto">
+            <span class="navbar-title">{{ dispayTitle }}</span>	
+          </router-link>
+          <ul class="navbar-nav ms-auto ">
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">Login</router-link>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
 </template>
-
-<script setup>
-    import { inject, ref, onMounted, onUnmounted } from 'vue';
     
-    const text = ref(`width: ${window.innerWith}, height: ${window.innerHeight}`);
-    const title = 'Mi app Vue con Lareavel';
-    const displayTitle = ref(title);
-
-    const updateWindowsDimensions = () => {
-        text.value = `width: ${window.innerWidth}, height: ${window.innerHeight}`;
-        if (window.innerEidth <= 768) {
-            if (title.length > 20) {
-                displayTitle.value = `${title.slice(0, 20)}...`;
-            } else {
-                displayTitle.value = title;
-            }
-        } else if((window.innetWidth > 768)) {
-            displayTitle.value = title;
+<script setup>
+    import { inject, ref, onMounted, onUnmounted  } from 'vue';
+  
+    // Texto que muestra las dimensiones de la ventana
+    const text = ref(`width: ${window.innerWidth}, height: ${window.innerHeight}`);
+    // Título que deseas mostrar en la barra de navegación
+    const title = 'Mi Aplicación Vue con Laravel';
+    const dispayTitle = ref(title)
+  
+    // Función para actualizar las dimensiones de la ventana
+    const updateWindowDimensions = () => {
+      text.value = `width: ${window.innerWidth}, height: ${window.innerHeight}`;
+      if (window.innerWidth <= 768) { // Ajusta este valor según tus necesidades
+        if (title.length > 20) {
+          dispayTitle.value = `${title.slice(0, 20)}...`;
+        } else {
+          dispayTitle.value = title;
         }
+      } else if((window.innerWidth > 768)) {
+        dispayTitle.value = title;
+      }
     };
-
+  
+    // Agregar el listener del evento 'resize' cuando el componente se monta
     onMounted(() => {
-        updateWindowsDimensions();
-        window.addEventListener('resize', updateWindowsDimensions);
-        if (window.innerWidth <= 768) {
-            if (title.lenght > 20) {
-                displayTitle.value = `${title.slice(0, 20)}...`;
-            } else {
-                displayTitle.value = title;
-            }
+      window.addEventListener('resize', updateWindowDimensions);
+      if (window.innerWidth <= 768) { // Ajusta este valor según tus necesidades
+        if (title.length > 20) {
+          dispayTitle.value = `${title.slice(0, 20)}...`;
+        } else {
+          dispayTitle.value = title;
         }
+      }
     });
-
+  
+    // Eliminar el listener del evento 'resize' cuando el componente se desmonta
     onUnmounted(() => {
-        window.removeEventListener('resize', updateWindowsDimensions);
+      window.removeEventListener('resize', updateWindowDimensions);
     });
-
+  
     const toggleSidebar = inject('toggleSidebar');
 </script>
-
+    
 <style scoped>
     .navbar {
-        height: 55px;
+      height: 55px;
     }
 </style>
