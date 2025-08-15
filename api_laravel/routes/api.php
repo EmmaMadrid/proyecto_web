@@ -19,26 +19,31 @@ use App\Http\Controllers\PermissionController;
 |
 */
 
-Route::prefix('v1')->group(function () {
-    Route::post('auth/login', [AuthController::class, 'login']);
-    Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-    Route::post('auth/register', [AuthController::class, 'register']);
-    Route::get('auth/abilities', [AuthController::class, 'abilities'])->middleware('auth:sanctum');
-    Route::get('auth/user-profile', [AuthController::class, 'userProfile'])->middleware('auth:sanctum');
+Route::prefix('v1')->group(function() {
+  // Auth Routes
+  Route::post('auth/login', [AuthController::class, 'login']);
+  Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+  Route::post('auth/register', [AuthController::class, 'register']);
+  Route::get('auth/abilities', [AuthController::class, 'abilities'])->middleware('auth:sanctum');
+  Route::get('auth/user-profile', [AuthController::class, 'userProfile'])->middleware('auth:sanctum');
 
-    Route::get('users', [UserController::class, 'index'])->middleware(['auth:sanctum']);
-    Route::post('users', [UserController::class, 'store'])->middleware(['auth:sanctum']);
-    Route::get('users/{id}', [UserController::class, 'show'])->middleware(['auth:sanctum']);
-    Route::delete('users/{id}', [UserController::class, 'destroy'])->middleware(['auth:sanctum']);
+  // Users Routes
+  Route::get('users', [UserController::class, 'index'])->middleware(['auth:sanctum', 'permission:users:view']);
+  Route::post('users', [UserController::class, 'store'])->middleware(['auth:sanctum', 'permission:users:create']);
+  Route::put('users/{id}', [UserController::class, 'update'])->middleware(['auth:sanctum', 'permission:users:edit']);
+  Route::delete('users/{id}', [UserController::class, 'destroy'])->middleware(['auth:sanctum', 'permission:users:delete']);
 
-    Route::get('roles', [RoleController::class, 'index'])->middleware(['auth:sanctum']);
-    Route::post('roles', [RoleController::class, 'store'])->middleware(['auth:sanctum']);
-    Route::put('roles/{id}', [RoleController::class, 'update'])->middleware(['auth:sanctum']);
-    Route::delete('roles/{id}', [RoleController::class, 'destroy'])->middleware(['auth:sanctum']);
+  // Roles Routes
+  Route::get('roles', [RoleController::class, 'index'])->middleware(['auth:sanctum', 'permission:roles:view']);
+  Route::post('roles', [RoleController::class, 'store'])->middleware(['auth:sanctum', 'permission:roles:create']);
+  Route::put('roles/{id}', [RoleController::class, 'update'])->middleware(['auth:sanctum', 'permission:roles:edit']);
+  Route::delete('roles/{id}', [RoleController::class, 'destroy'])->middleware(['auth:sanctum', 'permission:roles:delete']);
 
-    Route::get('permissions', [PermissionController::class, 'index'])->middleware(['auth:sanctum']);
-    Route::post('permissions', [PermissionController::class, 'store'])->middleware(['auth:sanctum']);
-    Route::put('permissions/{id}', [PermissionController::class, 'update'])->middleware(['auth:sanctum']);
-    Route::delete('permissions/{id}', [PermissionController::class, 'destroy'])->middleware(['auth:sanctum']);
+  // Permissions Routes
+  Route::get('permissions', [PermissionController::class, 'index'])->middleware(['auth:sanctum', 'permission:permissions:view']);
+  Route::post('permissions', [PermissionController::class, 'store'])->middleware(['auth:sanctum', 'permission:permissions:create']);
+  Route::put('permissions/{id}', [PermissionController::class, 'update'])->middleware(['auth:sanctum', 'permission:permissions:edit']);
+  Route::delete('permissions/{id}', [PermissionController::class, 'destroy'])->middleware(['auth:sanctum', 'permission:permissions:delete']);
 
 });
+

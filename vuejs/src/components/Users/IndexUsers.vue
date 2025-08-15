@@ -7,7 +7,7 @@
       </div>
     </div>
     <div v-else>
-      <div class="container-fluid">
+      <div class="container-fluid" v-if="can('users:view')">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -20,7 +20,7 @@
                 <FilterRadios @filter="handleRadioFilter" />
               </div>
               <div class="col-md-2 col-sm-4">
-                <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#userModal">Add User</button>
+                <button v-if="can('users:create')" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#userModal">Add User</button>
               </div>
             </div>
             <div class="table-responsive">
@@ -56,11 +56,13 @@
                           :data-role="item.role"
                           :data-active="item.active"
                           :data-externalid="item.external_id"
+                          v-if="can('users:edit')"
                         >
                           <i class="fas fa-edit"></i>
                         </button>
                         <button class="btn btn-danger m-1 destroy-btn" 
                           :data-id="item.id"
+                          v-if="can('users:delete')"
                         >
                           <i class="fas fa-trash"></i>
                         </button>
@@ -80,11 +82,9 @@
           @result="handleResultModal"
         />
       </div>
-      <!--
       <div v-else>
         <Forbidden />
       </div>
-      -->
     </div>
   </div>
 </template>
@@ -98,6 +98,7 @@
   import UserModal from './UpsertUsers.vue'
   import Swal from 'sweetalert2/dist/sweetalert2'
   import Forbidden from '../Errors/Forbidden.vue'
+  import { definedAbilities } from '../../utils/abilities'
 
   const perPage = 5
   const loading = ref(true)
@@ -213,6 +214,11 @@
     getUsers()
     document.addEventListener('click', handleClick)
 
+    definedAbilities()
+    
+    setInterval(() => {
+      definedAbilities()
+    }, 60000)
   })
 </script>
 

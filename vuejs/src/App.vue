@@ -1,16 +1,20 @@
 <template>
   <div>
     <Navbar />
-    <Sidebar />
+    <Sidebar v-if="!route.meta.hideMenus" />
 
-    <div class="content">
+    <div v-if="!route.meta.hideMenus" class="content">
       <Breadcrumb />
       <router-view></router-view>
     </div>
+    <div v-else>
+      <router-view></router-view>
+    </div>
 
-    <Footer /> 
+    <Footer v-if="!route.meta.hideMenus" /> 
   </div>
 </template>
+
 
 <script setup>
   import { provide, ref } from 'vue'

@@ -17,23 +17,25 @@ import Users from './components/Users/IndexUsers.vue';
 import Customers from "./components/Customers/IndexCustomers.vue";
 
 const routes = [
-    { path: "/home", name: "", component: Home },
-    { path: "/", name: "Home", component: Home },
+    { path: "/home", name: "", component: Home, meta: { hideMenus: true, showLogin: true } },
+    { path: "/", name: "Home", component: Home, meta: { hideMenus: true, showLogin: true } },
 
     { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
     { path: "/forbidden", name: "Forbidden", component: Forbidden },
-    { path: "/maintenance", name: "Maintenance", component: Maintenance },
+    { path: "/maintenance", name: "Maintenance", component: Maintenance, meta: { hideMenus: true } },
 
-    { path: "/login", name: "Login", component: Login },
-    { path: "/register", name: "Register", component: Register },
-    { path: "/forgot-password", name: "ForgotPassword", component: ForgotPassword },
-    { path: "/reset-password", name: "ResetPassword", component: ResetPassword },
+    { path: "/login", name: "Login", component: Login, meta: { hideMenus: true } },
+    { path: "/register", name: "Register", component: Register, meta: { hideMenus: true } },
+    { path: "/forgot-password", name: "ForgotPassword", component: ForgotPassword, meta: { hideMenus: true, showLogin: true } },
+    { path: "/reset-password", name: "ResetPassword", component: ResetPassword, meta: { hideMenus: true, showLogin: true } },
 
     { path: "/dashboard", name: "Dashboard", component: Dashboard },
-    { path: "/roles", name: "Roles", component: Roles },
-    { path: "/permissions", name: "Permissions", component: Permissions },
-    { path: "/users", name: "Users", component: Users },
-    { path: "/customers", name: "Customers", component: Customers },
+    { path: "/roles", name: "Roles", component: Roles, meta: { requiresAuth:true } },
+    { path: "/permissions", name: "Permissions", component: Permissions, meta: { requiresAuth:true } },
+    { path: "/users", name: "Users", component: Users, meta: { requiresAuth:true } },
+    { path: "/customers", name: "Customers", component: Customers, meta: { requiresAuth:true } },
+
 ]   
 
 export default routes
+

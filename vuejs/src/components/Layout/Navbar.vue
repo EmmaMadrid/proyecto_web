@@ -1,25 +1,32 @@
 <template>
-    <div>
-      <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-          <button class="navbar-toggler d-md-none" type="button" @click="toggleSidebar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <router-link to="/" class="navbar-brand ms-auto">
-            <span class="navbar-title">{{ dispayTitle }}</span>	
-          </router-link>
-          <ul class="navbar-nav ms-auto ">
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">Login</router-link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+  <div>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button v-if="!route.meta.hideMenus" class="navbar-toggler d-md-none" type="button" @click="toggleSidebar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <router-link to="/" class="navbar-brand ms-auto">
+          <span class="navbar-title">{{ dispayTitle }}</span>
+        </router-link>
+        <ul class="navbar-nav ms-auto ">
+          <li v-if="route.meta.showLogin" class="nav-item">
+            <router-link to="/login" class="nav-link">Login</router-link>
+          </li>
+        </ul>
+      </div>
+      <!--<div class="text-white border">
+        {{ text }}
+      </div>-->
+    </nav>
+  </div>
 </template>
+
     
 <script setup>
     import { inject, ref, onMounted, onUnmounted  } from 'vue';
+    import { useRoute } from 'vue-router';
+const route = useRoute();
+
   
     // Texto que muestra las dimensiones de la ventana
     const text = ref(`width: ${window.innerWidth}, height: ${window.innerHeight}`);

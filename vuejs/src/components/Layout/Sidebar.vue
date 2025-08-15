@@ -15,7 +15,7 @@
         </div>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li>
+            <li v-if="can('dashboard:view')">
                 <route-link to="/dashboard" class="nav-link">
                     <i class="fas fa-tachometer-alt me-2"></i>
                     Dashboard
@@ -48,25 +48,25 @@
                 </router-link>
             </li>
             <hr>
-            <li class="mb-1">
+            <li class="mb-1" v-if="can('users:view') || can('roles:view') || can('permissions:view')">
             <button class="btn btn-toggle align-items-center rounded collapsed nav-link" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                         Users & Roles
                     </button>
                 <div class="collapse" id="home-collapse" style="">
                     <ul class= "nav flex-column ms-3 text-extra-small">
-                        <li>
+                        <li v-if="can('users:view')">
                             <router-link to="/users" class="nav-link">
                                 <i class="fas fa-user me-2"></i>
                                 Users
                             </router-link>
                         </li>
-                        <li>
+                        <li v-if="can('roles:view')">
                             <router-link to="/" class="nav-link">
                                 <i class="fas fa-user-shield me-2"></i>
                                 Roles
                             </router-link>
                         </li>
-                        <li>
+                        <li v-if="can('permissions:view')">
                             <router-link to="/" class="nav-link">
                                 <i class="fas fa-lock me-2"></i>
                                 Permissions
@@ -85,8 +85,8 @@
                 <span class="text-uppercase">EM</span>
             </div>
             <div class="d-flex flex-column">
-                <strong>Emmanuel Madrid</strong>
-                <small>chris_payan@icloud.com</small>
+                <strong>{{ userProfile.name }}</strong>
+                <small>{{ userProfile.email }}</small>
             </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
@@ -102,11 +102,65 @@
 
 <script setup>
 import { inject } from 'vue';
+import axios from 'axios'
 import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue'
 
 const router = useRouter();
 const isActive = inject('isActive');
 const toggleSidebar = inject('toggleSidebar');
+const token = ref(localStorage.getItem('auth_token'))
+const userProfile = ref('')
+
+// 🔹 Agregamos abilities y función can()
+const abilities = JSON.parse(localStorage.getItem('abilities') || '[]')
+function can(permission) {
+  return abilities.includes(permission)
+}
+
+const logout = async () => {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
+  axios.post('/api/v1/auth/logout').then(response => {
+    localStorage.setItem('abilities', null);
+    localStorage.setItem('auth_token', null);
+    router.push({name: 'Login'})
+  }).catch(function(err){
+    console.log(err)
+    localStorage.setItem('abilities', null);
+    localStorage.setItem('auth_token', null);
+    router.push({name: 'Login'})
+  })
+}
+
+const getUserProfile = () => {
+  if(token.value){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
+    axios.get('api/v1/auth/user-profile').then((response) => {
+      userProfile.value = response.data.user
+      
+      //Tomar las dos primeras iniciales del nombre y ponerlo en el circulo
+      const names = response.data.user.name.split(' ');
+      const firstTwoNames = names.slice(0, 2);
+      userProfile.value.initials = firstTwoNames.map(name => name[0]).join(' ');
+      
+      // Poner puntos suspensivos si el nombre es mayor a 17 caracteres
+      if (response.data.user.name.length > 17) {
+        response.data.user.name = `${response.data.user.name.slice(0, 17)}...`;
+      }
+
+      // Poner puntos suspensivos si el email es mayor a 20 caracteres
+      if (response.data.user.email.length > 20) {
+        response.data.user.email = `${response.data.user.email.slice(0, 20)}...`;
+      }
+    }).catch(function(err){
+      console.log(err)
+    })
+  }
+}
+
+onMounted(() => {
+  getUserProfile()
+})
 </script>
 
 <style scoped>
